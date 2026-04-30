@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IZ Services — Irtaza Hussain | Developer & Author</title>
+  <meta name="description" content="Irtaza Hussain — Android Developer & Author. IZ Developers on Google Play. IZ Publications on Amazon KDP."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+  <style>
+    /* Fallback fonts while Google Fonts loads */
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+  </style>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #07090D;
+      --surface: #0C0F15;
+      --card: #111620;
+      --border: #1C2535;
+      --accent: #00C6FF;
+      --accent2: #6C63FF;
+      --gold: #F0B429;
+      --green: #00E096;
+      --text: #DCE6F0;
+      --muted: #6B7D8E;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* Noise texture */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* ═══════════════════ NAVBAR ═══════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 6%;
+      background: rgba(7, 9, 13, 0.9);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+    .nav-logo .iz { color: var(--accent); }
+    .nav-logo .rest { color: var(--white); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: var(--white) !important;
+      padding: 0.55rem 1.3rem;
+      border-radius: 7px;
+      font-size: 0.82rem !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.03em !important;
+      text-transform: none !important;
+      transition: opacity 0.2s, transform 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); color: var(--white) !important; }
+
+    /* Mobile menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ═══════════════════ HERO ═══════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 6% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-orb1 {
+      position: absolute;
+      top: -150px; left: -150px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,198,255,0.07) 0%, transparent 65%);
+      pointer-events: none;
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+    .hero-orb2 {
+      position: absolute;
+      bottom: -100px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(108,99,255,0.07) 0%, transparent 65%);
+      pointer-events: none;
+      animation: orbFloat 10s ease-in-out infinite reverse;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0,0); }
+      50% { transform: translate(30px, 20px); }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0,224,150,0.08);
+      border: 1px solid rgba(0,224,150,0.2);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1.8rem;
+      width: fit-content;
+      animation: fadeUp 0.7s ease both;
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-family: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: clamp(3.2rem, 8.5vw, 7.5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .hero h1 .name { color: var(--white); display: block; }
+    .hero h1 .title {
+      display: block;
+      background: linear-gradient(100deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      margin-top: 1.8rem;
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.75;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+    .hero-desc strong { color: var(--text); font-weight: 500; }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.8rem;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+    .pill {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: var(--white);
+      border: none;
+      border-radius: 9px;
+      padding: 0.85rem 2rem;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.82; transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 0.85rem 2rem;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══════════════════ STATS ═══════════════════ */
+    .stats-bar {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 6%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .stat {
+      text-align: center;
+      padding: 1rem;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-n {
+      font-family: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .stat-l {
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-top: 0.35rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════ SECTIONS ═══════════════════ */
+    section { padding: 6rem 6%; }
+
+    .sec-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+    .sec-title {
+      font-family: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+    .sec-desc {
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      max-width: 540px;
+    }
+
+    .divider { height: 1px; background: var(--border); margin: 0 6%; }
+
+    /* ═══════════════════ ABOUT ═══════════════════ */
+    .about-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 0.97rem;
+      margin-bottom: 1.1rem;
+    }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+    }
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .skill-card:hover { border-color: rgba(0,198,255,0.35); transform: translateY(-3px); }
+    .skill-icon { font-size: 1.7rem; margin-bottom: 0.65rem; }
+    .skill-name { font-family: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--white); margin-bottom: 0.25rem; }
+    .skill-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+    /* ═══════════════════ APPS ═══════════════════ */
+    .apps-section { background: var(--surface); }
+
+    .coming-soon-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(240,180,41,0.08);
+      border: 1px solid rgba(240,180,41,0.2);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .app-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2.5rem;
+      max-width: 600px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .app-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .app-card:hover { border-color: rgba(0,198,255,0.35); transform: translateY(-5px); }
+
+    .app-header {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .app-icon {
+      width: 60px; height: 60px;
+      background: linear-gradient(135deg, rgba(0,198,255,0.15), rgba(108,99,255,0.15));
+      border: 1px solid rgba(0,198,255,0.2);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      flex-shrink: 0;
+    }
+    .app-platform { font-size: 0.72rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.2rem; }
+    .app-name { font-family: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--white); }
+
+    .app-desc { color: var(--muted); font-size: 0.92rem; line-height: 1.65; margin-bottom: 1.5rem; }
+
+    .app-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.8rem; }
+    .app-tag {
+      background: rgba(0,198,255,0.07);
+      border: 1px solid rgba(0,198,255,0.15);
+      border-radius: 5px;
+      padding: 0.25rem 0.65rem;
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    .app-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(240,180,41,0.08);
+      border: 1px solid rgba(240,180,41,0.2);
+      border-radius: 7px;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.83rem;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    /* ═══════════════════ BOOKS ═══════════════════ */
+    .book-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      max-width: 420px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .book-card:hover { border-color: rgba(240,180,41,0.4); transform: translateY(-5px); }
+
+    .book-cover {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      background: linear-gradient(135deg, #0a1628 0%, #0d2137 50%, #071525 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .book-cover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(17,22,32,0.8));
+    }
+
+    .book-body { padding: 1.8rem; }
+    .book-genre { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+    .book-title { font-family: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--white); margin-bottom: 0.7rem; line-height: 1.3; }
+    .book-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.65; margin-bottom: 1.3rem; }
+    .book-meta { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.3rem; }
+    .book-meta span { color: var(--gold); }
+
+    .book-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, rgba(240,180,41,0.15), rgba(240,180,41,0.05));
+      border: 1px solid rgba(240,180,41,0.3);
+      border-radius: 8px;
+      padding: 0.7rem 1.4rem;
+      color: var(--gold);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .book-btn:hover { background: rgba(240,180,41,0.2); transform: translateY(-2px); }
+
+    /* ═══════════════════ EXPERIENCE ═══════════════════ */
+    .exp-section { background: var(--surface); }
+
+    .timeline {
+      margin-top: 3rem;
+      position: relative;
+      padding-left: 2.5rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 10px; bottom: 10px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+    }
+    .tl-item {
+      position: relative;
+      margin-bottom: 2.8rem;
+    }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -3rem;
+      top: 5px;
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 12px rgba(0,198,255,0.5);
+    }
+    .tl-year { font-size: 0.72rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .tl-role { font-family: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--white); margin-bottom: 0.2rem; }
+    .tl-co { font-size: 0.83rem; color: var(--muted); margin-bottom: 0.6rem; }
+    .tl-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+    /* ═══════════════════ SOCIAL ═══════════════════ */
+    .social-section { text-align: center; }
+    .social-section .sec-desc { margin: 0 auto; }
+
+    .social-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .soc-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.85rem 1.5rem;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 400;
+      transition: border-color 0.25s, color 0.25s, transform 0.25s, background 0.25s;
+    }
+    .soc-btn:hover { transform: translateY(-4px); }
+
+    .soc-btn.instagram:hover { border-color: #E1306C; color: #E1306C; background: rgba(225,48,108,0.06); }
+    .soc-btn.facebook:hover  { border-color: #1877F2; color: #1877F2; background: rgba(24,119,242,0.06); }
+    .soc-btn.whatsapp:hover  { border-color: #25D366; color: #25D366; background: rgba(37,211,102,0.06); }
+
+    .soc-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .soc-btn.instagram svg { fill: #E1306C; }
+    .soc-btn.facebook svg  { fill: #1877F2; }
+    .soc-btn.whatsapp svg  { fill: #25D366; }
+
+    /* ═══════════════════ CONTACT ═══════════════════ */
+    .contact-section { background: var(--surface); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+      align-items: start;
+      max-width: 600px;
+    }
+
+    .contact-info p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .contact-item-icon {
+      width: 42px; height: 42px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-item-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; }
+    .contact-item-val { font-size: 0.92rem; color: var(--text); font-weight: 400; }
+    .contact-item-val a { color: var(--accent); text-decoration: none; }
+    .contact-item-val a:hover { text-decoration: underline; }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2.5rem;
+    }
+    .contact-card h3 {
+      font-family: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .contact-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.78rem; color: var(--muted); margin-bottom: 0.4rem; letter-spacing: 0.05em; }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.25s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    /* ═══════════════════ FOOTER ═══════════════════ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo { font-family: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-weight: 800; font-size: 1.1rem; }
+    .footer-logo .iz { color: var(--accent); }
+    .footer-logo .rest { color: var(--white); }
+    .footer-copy { color: var(--muted); font-size: 0.8rem; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { color: var(--muted); font-size: 0.8rem; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ═══════════════════ RESPONSIVE ═══════════════════ */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat:nth-child(2n) { border-bottom: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2.8rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: repeat(2,1fr); }
+      .soc-btn span { display: none; }
+      .soc-btn { padding: 0.85rem; }
+    }
+
+    /* Mobile nav overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(7,9,13,0.97);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--accent); }
+    .mobile-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-close" onclick="closeMobileNav()">✕</button>
+    <a href="#about" onclick="closeMobileNav()">About</a>
+    <a href="#apps" onclick="closeMobileNav()">Apps</a>
+    <a href="#books" onclick="closeMobileNav()">Books</a>
+    <a href="#experience" onclick="closeMobileNav()">Experience</a>
+    <a href="#social" onclick="closeMobileNav()">Connect</a>
+    <a href="#contact" onclick="closeMobileNav()">Contact</a>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="#home" class="nav-logo"><span class="iz">IZ</span><span class="rest"> Services</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#apps">Apps</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#social">Connect</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+    <button class="hamburger" onclick="openMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-orb1"></div>
+    <div class="hero-orb2"></div>
+
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      Open to Collaborations
+    </div>
+
+    <h1>
+      <span class="name">Irtaza Hussain</span>
+      <span class="title">Dev & Author</span>
+    </h1>
+
+    <p class="hero-desc">
+      Building powerful Android apps under <strong>IZ Developers</strong> and publishing
+      books under <strong>IZ Publications</strong> — two brands, one vision: create things
+      that matter.
+    </p>
+
+    <div class="hero-pills">
+      <span class="pill">📱 Android Developer</span>
+      <span class="pill">📚 Published Author</span>
+      <span class="pill">🤖 AI-Assisted Dev</span>
+      <span class="pill">🇵🇰 Pakistan</span>
+    </div>
+
+    <div class="hero-btns">
+      <a href="#apps" class="btn-primary">Explore My Work →</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-n">1+</div>
+      <div class="stat-l">Apps Published</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">1</div>
+      <div class="stat-l">Books on Amazon</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">2</div>
+      <div class="stat-l">Active Brands</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">∞</div>
+      <div class="stat-l">Ideas Brewing</div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="sec-label">Who I Am</div>
+    <div class="sec-title">Developer. Author. Creator.</div>
+    <div class="about-wrap">
+      <div class="about-text">
+        <p>
+          I'm <strong>Irtaza Hussain</strong> — an independent Android developer and published author
+          from Pakistan. I operate under two professional brands:
+          <strong>IZ Developers</strong> on Google Play Console and
+          <strong>IZ Publications</strong> on Amazon KDP.
+        </p>
+        <p>
+          My work lives at the intersection of <strong>technology and creativity</strong>. I build
+          practical, well-designed Android applications that solve real everyday problems,
+          and I write books ranging from freelance productivity guides to compelling fiction.
+        </p>
+        <p>
+          I work with cutting-edge <strong>AI-assisted development workflows</strong> — leveraging
+          Gemini AI agent mode inside Android Studio — which lets me ship high-quality, polished
+          products efficiently as a solo creator.
+        </p>
+        <p>
+          Whether it's an app on the Play Store or a book on Amazon — every product I release
+          is built with care, intention, and a focus on real value.
+        </p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon">📱</div>
+          <div class="skill-name">Android Dev</div>
+          <div class="skill-desc">Native apps with Android Studio & Gemini AI agent workflows</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">📖</div>
+          <div class="skill-name">Author</div>
+          <div class="skill-desc">Non-fiction & fiction books published on Amazon KDP</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🤖</div>
+          <div class="skill-name">AI Workflows</div>
+          <div class="skill-desc">AI-powered development for faster, smarter product building</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🚀</div>
+          <div class="skill-name">Publishing</div>
+          <div class="skill-desc">End-to-end: from idea to live product on Play Store & Amazon</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- APPS -->
+  <section id="apps" class="apps-section">
+    <div class="sec-label">IZ Developers · Google Play</div>
+    <div class="sec-title">Android Applications</div>
+    <p class="sec-desc">Practical, polished Android apps — built to solve real problems beautifully.</p>
+
+    <div class="coming-soon-banner" style="margin-top:2rem;">
+      ⏳ App launching soon — Testing in progress
+    </div>
+
+    <div class="app-card">
+      <div class="app-header">
+        <div class="app-icon">💰</div>
+        <div>
+          <div class="app-platform">Google Play Store · IZ Developers</div>
+          <div class="app-name">SpendSage: Expense Tracker</div>
+        </div>
+      </div>
+      <p class="app-desc">
+        A smart, intuitive expense tracking app that helps you take full control of your personal finances.
+        Log your daily expenses, visualize spending patterns with clean charts, set budgets, and build
+        better financial habits — all in one beautifully designed app.
+      </p>
+      <div class="app-tags">
+        <span class="app-tag">Expense Logging</span>
+        <span class="app-tag">Budget Tracking</span>
+        <span class="app-tag">Analytics Charts</span>
+        <span class="app-tag">Categories</span>
+        <span class="app-tag">Dark Mode</span>
+      </div>
+      <div class="app-status">
+        ⏳ Currently in testing — Play Store link coming soon
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- BOOKS -->
+  <section id="books">
+    <div class="sec-label">IZ Publications · Amazon KDP</div>
+    <div class="sec-title">Published Books</div>
+    <p class="sec-desc">Words that educate, inspire, and stay with you long after the last page.</p>
+
+    <div style="margin-top:3rem;">
+      <div class="book-card">
+        <div class="book-cover">⏱️</div>
+        <div class="book-body">
+          <div class="book-genre">Non-Fiction · Freelance Productivity</div>
+          <div class="book-title">Mastering Time Management for Freelancers</div>
+          <div class="book-desc">
+            A practical, no-fluff guide for independent professionals who want to reclaim their time,
+            maximize productivity, and build a sustainable freelance career — without burning out.
+            Packed with actionable strategies you can implement immediately.
+          </div>
+          <div class="book-meta">Published by <span>IZ Publications</span> · Available on Amazon KDP</div>
+          <a href="https://www.amazon.com/dp/B0GX2YPFNV" target="_blank" rel="noopener" class="book-btn">
+            📖 Buy on Amazon →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="exp-section">
+    <div class="sec-label">Journey</div>
+    <div class="sec-title">Experience & Milestones</div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">Present</div>
+        <div class="tl-role">Android Developer</div>
+        <div class="tl-co">IZ Developers · Google Play Console</div>
+        <div class="tl-desc">Building and publishing Android applications under the IZ Developers brand. Currently launching SpendSage — an expense tracker app — on the Google Play Store.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">Present</div>
+        <div class="tl-role">Author & Publisher</div>
+        <div class="tl-co">IZ Publications · Amazon KDP</div>
+        <div class="tl-desc">Writing and self-publishing books on Amazon KDP. Published "Mastering Time Management for Freelancers" — a practical productivity guide for independent professionals.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">Recent</div>
+        <div class="tl-role">AI-Assisted Development</div>
+        <div class="tl-co">Independent</div>
+        <div class="tl-desc">Adopted advanced AI development workflows using Gemini agent mode in Android Studio — enabling faster, smarter product development as a solo indie developer.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SOCIAL -->
+  <section id="social" class="social-section">
+    <div class="sec-label">Connect With Me</div>
+    <div class="sec-title">Find Me Online</div>
+    <p class="sec-desc">Follow my journey — from app launches to behind-the-scenes development updates.</p>
+
+    <div class="social-row">
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/____irtaza_kolachi____?igsh=MTZ2ajMxcWZrMG5maQ==" target="_blank" rel="noopener" class="soc-btn instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        <span>Instagram</span>
+      </a>
+
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/share/1B6KqzA622/" target="_blank" rel="noopener" class="soc-btn facebook">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        <span>Facebook</span>
+      </a>
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/923162608076" target="_blank" rel="noopener" class="soc-btn whatsapp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <div class="sec-label">Get In Touch</div>
+    <div class="sec-title">Let's Work Together</div>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>
+          Interested in collaborating, have a question about my apps, or want to discuss
+          publishing opportunities? I'm open to partnerships, freelance projects,
+          and exciting new ideas.
+        </p>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">📧</div>
+          <div>
+            <div class="contact-item-label">Support Email</div>
+            <div class="contact-item-val"><a href="mailto:izdevelopersupport@gmail.com">izdevelopersupport@gmail.com</a></div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">💬</div>
+          <div>
+            <div class="contact-item-label">WhatsApp</div>
+            <div class="contact-item-val"><a href="https://wa.me/923162608076">+92 316 2608076</a></div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-val">Pakistan 🇵🇰</div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><span class="iz">IZ</span><span class="rest"> Services</span></div>
+    <div class="footer-copy">© 2025 Irtaza Hussain · IZ Developers · IZ Publications · izservices.site</div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#apps">Apps</a>
+      <a href="#books">Books</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    // ── Mobile Nav ──
+    function openMobileNav() {
+      document.getElementById('mobileNav').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobileNav() {
+      document.getElementById('mobileNav').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ── Smooth scroll (only internal # links) ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          const top = target.getBoundingClientRect().top + window.pageYOffset - 80;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ── Navbar shadow on scroll ──
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      nav.style.boxShadow = window.scrollY > 20 ? '0 4px 30px rgba(0,0,0,0.4)' : 'none';
+    });
+
+    // ── Scroll fade-in ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.skill-card, .app-card, .book-card, .tl-item, .contact-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease, border-color 0.3s';
+      observer.observe(el);
+    });
+
+    // ── Contact Form → Formspree ──
+    async function sendForm() {
+      const name    = document.getElementById('fname').value.trim();
+      const email   = document.getElementById('femail').value.trim();
+      const message = document.getElementById('fmessage').value.trim();
+      const btn     = document.getElementById('sendBtn');
+      const success = document.getElementById('formSuccess');
+      const error   = document.getElementById('formError');
+
+      // Basic validation
+      if (!name || !email || !message) {
+        error.textContent = '⚠️ Please fill in all fields before sending.';
+        error.style.display = 'block';
+        success.style.display = 'none';
+        return;
+      }
+
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      error.style.display = 'none';
+      success.style.display = 'none';
+
+      try {
+        // Formspree endpoint — replace YOUR_FORM_ID after signup at formspree.io
+        const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ name, email, message })
+        });
+
+        if (res.ok) {
+          success.style.display = 'block';
+          document.getElementById('fname').value = '';
+          document.getElementById('femail').value = '';
+          document.getElementById('fmessage').value = '';
+          btn.textContent = 'Send Message →';
+          btn.disabled = false;
+        } else {
+          throw new Error('Form error');
+        }
+      } catch (err) {
+        error.textContent = '❌ Something went wrong. Email me directly at izdevelopersupport@gmail.com';
+        error.style.display = 'block';
+        btn.textContent = 'Send Message →';
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
