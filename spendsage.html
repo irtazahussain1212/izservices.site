@@ -4,13 +4,20 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SpendSage — Smart Expense Tracker App</title>
-  <meta name="description" content="Take control of your finances with SpendSage. Track expenses, set budgets, and visualize your spending — beautifully designed for Android."/>
+  <meta name="description" content="Track expenses, manage budgets, split bills, track installments and more with SpendSage — the all-in-one personal finance app for Android."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+
+  <!-- Adsterra Popunder -->
+  <script src="https://pl29532382.effectivecpmnetwork.com/57/b6/51/57b651e9c4d6bb9659800d27294685ea.js"></script>
+
+  <!-- Adsterra Smartlink (auto redirect for engaged users) -->
+  <script>
+    // Smartlink: https://www.effectivecpmnetwork.com/q9ec3eh6a?key=5d1a528a04e11e22968f7e9d8d67fd35
+  </script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
       --bg: #07090D;
       --surface: #0C0F15;
@@ -19,13 +26,12 @@
       --accent: #00C6FF;
       --accent2: #6C63FF;
       --green: #00E096;
+      --gold: #F0B429;
       --text: #DCE6F0;
       --muted: #6B7D8E;
       --white: #ffffff;
     }
-
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg);
       color: var(--text);
@@ -34,389 +40,325 @@
       overflow-x: hidden;
     }
 
-    /* ── NAVBAR ── */
+    /* NAVBAR */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.2rem 6%;
-      background: rgba(7,9,13,0.9);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 6%;
+      background: rgba(7,9,13,0.92);
       backdrop-filter: blur(24px);
       border-bottom: 1px solid var(--border);
     }
-
     .nav-logo {
+      display: flex; align-items: center; gap: 0.7rem;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      width: 36px; height: 36px; border-radius: 10px;
+      object-fit: cover;
+    }
+    .nav-logo span {
       font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.3rem;
-      text-decoration: none;
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+      font-weight: 800; font-size: 1.2rem; color: var(--white);
     }
-    .nav-logo .logo-icon {
-      width: 34px; height: 34px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-radius: 9px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-    }
-
     .nav-back {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
+      color: var(--muted); text-decoration: none; font-size: 0.85rem;
+      display: flex; align-items: center; gap: 0.4rem;
       transition: color 0.2s;
     }
     .nav-back:hover { color: var(--accent); }
 
-    /* ── HERO ── */
+    /* HERO */
     .hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
       text-align: center;
-      padding: 120px 6% 80px;
-      position: relative;
-      overflow: hidden;
+      padding: 130px 6% 80px;
+      position: relative; overflow: hidden;
     }
-
     .orb1 {
-      position: absolute;
-      top: -200px; left: 50%;
-      transform: translateX(-50%);
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(0,198,255,0.08) 0%, transparent 65%);
+      position: absolute; top: -150px; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(0,198,255,0.07) 0%, transparent 65%);
       pointer-events: none;
     }
     .orb2 {
-      position: absolute;
-      bottom: -100px; right: -100px;
+      position: absolute; bottom: -100px; right: -100px;
       width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(108,99,255,0.07) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(108,99,255,0.06) 0%, transparent 65%);
       pointer-events: none;
     }
 
     .app-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(0,224,150,0.08);
-      border: 1px solid rgba(0,224,150,0.2);
-      border-radius: 100px;
-      padding: 0.4rem 1.1rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 2rem;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(0,224,150,0.08); border: 1px solid rgba(0,224,150,0.2);
+      border-radius: 100px; padding: 0.4rem 1.1rem;
+      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 2rem;
       animation: fadeUp 0.6s ease both;
     }
-    .badge-dot {
-      width: 6px; height: 6px;
-      background: var(--green);
-      border-radius: 50%;
-      animation: blink 2s infinite;
-    }
+    .badge-dot { width:6px; height:6px; background:var(--green); border-radius:50%; animation: blink 2s infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-    .app-icon-big {
-      width: 100px; height: 100px;
-      background: linear-gradient(135deg, #0d1f3c, #1a1040);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
+    .app-logo-wrap {
       margin: 0 auto 2rem;
       animation: fadeUp 0.6s 0.05s ease both;
-      box-shadow: 0 20px 60px rgba(0,198,255,0.1);
+      position: relative;
+    }
+    .app-logo-wrap img {
+      width: 110px; height: 110px;
+      border-radius: 26px;
+      box-shadow: 0 24px 60px rgba(0,198,255,0.15), 0 0 0 1px rgba(255,255,255,0.06);
     }
 
-    .hero h1 {
+    .hero-app-name {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(2.8rem, 7vw, 6rem);
+      font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 800;
-      line-height: 1;
-      letter-spacing: -0.04em;
       color: var(--white);
-      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.3rem;
       animation: fadeUp 0.6s 0.1s ease both;
     }
-    .hero h1 span {
+
+    .hero-tagline {
+      font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.6s 0.12s ease both;
+    }
+    .hero-tagline strong {
       background: linear-gradient(100deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      font-weight: 700;
     }
 
-    .hero-sub {
-      font-size: 1.15rem;
-      color: var(--muted);
-      max-width: 520px;
-      margin: 1.5rem auto 0;
-      line-height: 1.7;
+    .hero-desc {
+      font-size: 1rem; color: var(--muted);
+      max-width: 520px; margin: 0 auto 2rem;
+      line-height: 1.75;
       animation: fadeUp 0.6s 0.15s ease both;
     }
 
     .hero-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      justify-content: center;
-      margin-top: 1.8rem;
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      justify-content: center; margin-bottom: 2.5rem;
       animation: fadeUp 0.6s 0.2s ease both;
     }
     .pill {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 0.35rem 0.9rem;
-      font-size: 0.8rem;
-      color: var(--muted);
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 100px; padding: 0.3rem 0.85rem;
+      font-size: 0.78rem; color: var(--muted);
     }
 
     .hero-btns {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 2.5rem;
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
       animation: fadeUp 0.6s 0.25s ease both;
     }
 
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: var(--white);
-      border: none;
-      border-radius: 10px;
+      color: var(--white); border: none; border-radius: 10px;
       padding: 1rem 2.2rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500;
+      cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.6rem;
       transition: opacity 0.2s, transform 0.2s;
     }
     .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
 
     .btn-outline {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 10px;
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border); border-radius: 10px;
       padding: 1rem 2.2rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1rem;
-      font-weight: 400;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 400;
+      cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
       transition: border-color 0.2s, color 0.2s, transform 0.2s;
     }
     .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-    @keyframes fadeUp {
-      from { opacity:0; transform:translateY(25px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(25px)} to{opacity:1;transform:translateY(0)} }
 
-    /* ── FEATURES ── */
-    .features {
-      padding: 6rem 6%;
-      background: var(--surface);
-    }
+    /* FEATURES */
+    .features { padding: 6rem 6%; background: var(--surface); }
 
     .sec-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: 0.6rem;
-      text-align: center;
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: 0.5rem; text-align: center;
     }
     .sec-title {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: var(--white);
-      margin-bottom: 0.7rem;
-      text-align: center;
+      font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800;
+      letter-spacing: -0.03em; color: var(--white); margin-bottom: 0.7rem; text-align: center;
     }
     .sec-desc {
-      color: var(--muted);
-      font-size: 0.98rem;
-      line-height: 1.7;
-      text-align: center;
-      max-width: 500px;
-      margin: 0 auto 3rem;
+      color: var(--muted); font-size: 0.98rem; line-height: 1.7;
+      text-align: center; max-width: 500px; margin: 0 auto 3rem;
     }
 
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.2rem;
-      max-width: 1000px;
-      margin: 0 auto;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem; max-width: 1100px; margin: 0 auto;
     }
 
     .feature-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.8rem;
       transition: border-color 0.3s, transform 0.3s;
     }
     .feature-card:hover { border-color: rgba(0,198,255,0.3); transform: translateY(-4px); }
 
     .feature-icon {
-      width: 52px; height: 52px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1.2rem;
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1rem;
     }
-    .fi-blue { background: rgba(0,198,255,0.1); border: 1px solid rgba(0,198,255,0.2); }
-    .fi-purple { background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.2); }
-    .fi-green { background: rgba(0,224,150,0.1); border: 1px solid rgba(0,224,150,0.2); }
-    .fi-gold { background: rgba(240,180,41,0.1); border: 1px solid rgba(240,180,41,0.2); }
+    .fi-blue   { background:rgba(0,198,255,0.1);  border:1px solid rgba(0,198,255,0.2);  }
+    .fi-purple { background:rgba(108,99,255,0.1); border:1px solid rgba(108,99,255,0.2); }
+    .fi-green  { background:rgba(0,224,150,0.1);  border:1px solid rgba(0,224,150,0.2);  }
+    .fi-gold   { background:rgba(240,180,41,0.1); border:1px solid rgba(240,180,41,0.2); }
+    .fi-red    { background:rgba(255,80,80,0.1);  border:1px solid rgba(255,80,80,0.2);  }
+    .fi-teal   { background:rgba(0,210,200,0.1);  border:1px solid rgba(0,210,200,0.2);  }
 
-    .feature-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-    }
-    .feature-desc {
-      color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.6;
-    }
+    .feature-title { font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--white); margin-bottom:0.4rem; }
+    .feature-desc  { color:var(--muted); font-size:0.85rem; line-height:1.6; }
 
-    /* ── HOW IT WORKS ── */
-    .how {
-      padding: 6rem 6%;
-    }
+    /* HOW IT WORKS */
+    .how { padding: 6rem 6%; }
 
     .steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      max-width: 900px;
-      margin: 3rem auto 0;
-      position: relative;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem; max-width: 1000px; margin: 3rem auto 0;
     }
 
     .step {
-      text-align: center;
-      padding: 2rem 1.5rem;
+      text-align: center; padding: 2rem 1.2rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px;
+      transition: border-color 0.3s, transform 0.3s;
     }
+    .step:hover { border-color: rgba(0,198,255,0.25); transform: translateY(-3px); }
 
     .step-num {
-      width: 48px; height: 48px;
+      width: 44px; height: 44px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-radius: 50%;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem;
+      color: var(--white); margin: 0 auto 1rem;
+    }
+    .step-title { font-family:'Syne',sans-serif; font-weight:700; font-size:0.95rem; color:var(--white); margin-bottom:0.5rem; }
+    .step-desc  { color:var(--muted); font-size:0.82rem; line-height:1.6; }
+
+    /* CTA */
+
+    .cta-box {
+    }
+    .cta-box::before {
+      content: ''; position: absolute; top:0; left:0; right:0; height:3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .cta-box h2 {
+      font-family:'Syne',sans-serif; font-size:clamp(1.8rem,3vw,2.4rem);
+      font-weight:800; color:var(--white); margin-bottom:1rem; letter-spacing:-0.03em;
+    }
+    .cta-box p { color:var(--muted); font-size:1rem; line-height:1.7; margin-bottom:2rem; }
+
+    .playstore-btn {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: var(--white); text-decoration: none;
+      border-radius: 12px; padding: 1rem 2.5rem;
+      font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500;
+      transition: opacity 0.2s, transform 0.2s;
+      margin: 0 auto;
+    }
+    .playstore-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+    .playstore-btn svg { width:22px; height:22px; fill:white; flex-shrink:0; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border); padding: 1.8rem 6%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-copy { color:var(--muted); font-size:0.8rem; }
+    .footer-link { color:var(--muted); font-size:0.8rem; text-decoration:none; transition:color 0.2s; }
+    .footer-link:hover { color:var(--accent); }
+
+    /* ── AD SECTIONS ── */
+    .ad-section-video {
+      padding: 3rem 6%;
+      background: var(--bg);
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .ad-section-banner {
+      padding: 3rem 6%;
+      background: var(--surface);
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .ad-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+    .ad-video-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .ad-banner-wrap {
+      max-width: 728px;
+      margin: 0 auto;
+    }
+    .ad-placeholder-video {
+      background: var(--card);
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      height: 360px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: var(--white);
-      margin: 0 auto 1.2rem;
     }
-
-    .step-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-    }
-    .step-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.6; }
-
-    /* ── CTA ── */
-    .cta-section {
-      padding: 6rem 6%;
-      background: var(--surface);
-      text-align: center;
-    }
-
-    .cta-box {
-      max-width: 600px;
-      margin: 0 auto;
+    .ad-placeholder-banner {
       background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 3.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-box::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-    }
-
-    .cta-box h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      font-weight: 800;
-      color: var(--white);
-      margin-bottom: 1rem;
-      letter-spacing: -0.03em;
-    }
-    .cta-box p {
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.7;
-      margin-bottom: 2rem;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 1.8rem 6%;
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      height: 90px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
+      justify-content: center;
     }
-    .footer-copy { color: var(--muted); font-size: 0.8rem; }
-    .footer-link { color: var(--muted); font-size: 0.8rem; text-decoration: none; transition: color 0.2s; }
-    .footer-link:hover { color: var(--accent); }
+    .ad-placeholder-inner {
+      text-align: center;
+    }
+    .ad-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.3;
+    }
+    .ad-placeholder-text {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      opacity: 0.5;
+    }
+    .ad-placeholder-sub {
+      color: var(--muted);
+      font-size: 0.75rem;
+      opacity: 0.35;
+      margin-top: 0.3rem;
+    }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 600px) {
-      .features-grid { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: 1fr; }
-      .cta-box { padding: 2rem 1.5rem; }
-      footer { flex-direction: column; text-align: center; }
+    @media (max-width: 640px) {
+      .ad-placeholder-video { height: 200px; }
     }
   </style>
 </head>
@@ -425,10 +367,10 @@
   <!-- NAV -->
   <nav>
     <a href="spendsage.html" class="nav-logo">
-      <div class="logo-icon">💰</div>
-      SpendSage
+      <img src="SpendSage_512_nobg.png" alt="SpendSage Logo"/>
+      <span>SpendSage</span>
     </a>
-    <a href="index.html" class="nav-back">← Back to IZ Services</a>
+    <a href="index.html" class="nav-back">← IZ Services</a>
   </nav>
 
   <!-- HERO -->
@@ -438,31 +380,33 @@
 
     <div class="app-badge">
       <div class="badge-dot"></div>
-      Android App · IZ Developers
+      Now Live on Google Play
     </div>
 
-    <div class="app-icon-big">💰</div>
+    <div class="app-logo-wrap">
+      <img src="SpendSage_512_nobg.png" alt="SpendSage App Icon"/>
+    </div>
 
-    <h1>Spend <span>Smarter</span><br>Every Day</h1>
+    <div class="hero-app-name">SpendSage</div>
+    <div class="hero-tagline">Your <strong>All-in-One</strong> Personal Finance App</div>
 
-    <p class="hero-sub">
-      SpendSage is your personal finance companion — track every rupee, set smart budgets,
-      and finally understand where your money goes.
+    <p class="hero-desc">
+      Track expenses, manage installments, split bills, set goals, and gain deep insights
+      into your finances — all in one beautifully designed Android app.
     </p>
 
     <div class="hero-pills">
-      <span class="pill">📊 Visual Analytics</span>
-      <span class="pill">🎯 Budget Goals</span>
-      <span class="pill">🌙 Dark Mode</span>
-      <span class="pill">📱 Android</span>
-      <span class="pill">🆓 Free to Download</span>
+      <span class="pill">📊 Deep Analytics</span>
+      <span class="pill">🏦 Lend & Borrow</span>
+      <span class="pill">📅 Installment Tracker</span>
+      <span class="pill">🤝 Split Bills</span>
+      <span class="pill">☁️ Cloud Sync</span>
+      <span class="pill">🔒 Biometric Lock</span>
+      <span class="pill">🆓 Free</span>
     </div>
 
     <div class="hero-btns">
-      <a href="#" id="playStoreBtn" class="btn-primary">
-        ▶ Download on Play Store
-      </a>
-      <a href="#features" class="btn-outline">See Features ↓</a>
+      <a href="#features" class="btn-primary">See Features ↓</a>
     </div>
   </section>
 
@@ -470,94 +414,194 @@
   <section class="features" id="features">
     <div class="sec-label">What's Inside</div>
     <div class="sec-title">Everything You Need</div>
-    <p class="sec-desc">Powerful features designed to make personal finance simple, visual, and stress-free.</p>
+    <p class="sec-desc">Powerful features to manage every aspect of your personal finances — all in one app.</p>
 
     <div class="features-grid">
+
       <div class="feature-card">
-        <div class="feature-icon fi-blue">📝</div>
-        <div class="feature-title">Expense Logging</div>
-        <div class="feature-desc">Log expenses in seconds. Add amount, category, and notes — quick and effortless every time.</div>
+        <div class="feature-icon fi-blue">💸</div>
+        <div class="feature-title">Add Expenses</div>
+        <div class="feature-desc">Log daily expenses instantly. Add amount, category, notes and date — quick and effortless.</div>
       </div>
+
+      <div class="feature-card">
+        <div class="feature-icon fi-purple">🤝</div>
+        <div class="feature-title">Lend & Borrow Tracker</div>
+        <div class="feature-desc">Keep track of money you lend to others or borrow. Never forget who owes what.</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon fi-gold">📅</div>
+        <div class="feature-title">Installment (Qist) Tracker</div>
+        <div class="feature-desc">Track all your installments and Qist payments. Set due dates and get reminded before every payment.</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon fi-green">🧾</div>
+        <div class="feature-title">Split Bills</div>
+        <div class="feature-desc">Split any expense fairly among friends or family. No more awkward calculations.</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon fi-blue">🎯</div>
+        <div class="feature-title">Set Goals</div>
+        <div class="feature-desc">Set savings goals and track your progress every day. Stay motivated to reach your financial targets.</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon fi-red">🔁</div>
+        <div class="feature-title">Auto Payments</div>
+        <div class="feature-desc">Set recurring payments — rent, subscriptions, utilities — and never miss an auto-deduction again.</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon fi-purple">📈</div>
+        <div class="feature-title">Deep Analytics</div>
+        <div class="feature-desc">Get rich visual insights — spending trends, category breakdowns, monthly comparisons and more.</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon fi-teal">🏷️</div>
+        <div class="feature-title">25+ Categories + Custom</div>
+        <div class="feature-desc">Choose from 25+ built-in categories or create your own. Organize expenses exactly your way.</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon fi-blue">☁️</div>
+        <div class="feature-title">Cloud Sync</div>
+        <div class="feature-desc">Your data safely backed up and synced across devices. Never lose your financial records.</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon fi-green">🔒</div>
+        <div class="feature-title">Biometric Lock</div>
+        <div class="feature-desc">Secure your financial data with fingerprint or face unlock. Your privacy, protected.</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon fi-gold">💬</div>
+        <div class="feature-title">Live Customer Support</div>
+        <div class="feature-desc">Stuck or have questions? Our live support team is ready to help you anytime.</div>
+      </div>
+
       <div class="feature-card">
         <div class="feature-icon fi-purple">📊</div>
-        <div class="feature-title">Visual Analytics</div>
-        <div class="feature-desc">Beautiful charts show exactly where your money goes — by category, by week, by month.</div>
+        <div class="feature-title">Full Analytics Dashboard</div>
+        <div class="feature-desc">Monthly reports, yearly summaries, and deep spending analysis — all beautifully visualized.</div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon fi-green">🎯</div>
-        <div class="feature-title">Budget Tracking</div>
-        <div class="feature-desc">Set monthly budgets per category and get notified before you overspend.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon fi-gold">🏷️</div>
-        <div class="feature-title">Smart Categories</div>
-        <div class="feature-desc">Food, transport, bills, entertainment — organize spending exactly how you think about it.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon fi-blue">🌙</div>
-        <div class="feature-title">Dark Mode</div>
-        <div class="feature-desc">Sleek dark interface that's easy on your eyes, day or night.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon fi-purple">🔒</div>
-        <div class="feature-title">Private & Secure</div>
-        <div class="feature-desc">Your financial data stays on your device. No accounts required, no data shared.</div>
-      </div>
+
     </div>
   </section>
 
   <!-- HOW IT WORKS -->
-  <section class="how">
+  <section class="how" id="how">
     <div class="sec-label">Simple Setup</div>
     <div class="sec-title">How It Works</div>
-    <p class="sec-desc">Get started in under a minute — no signup, no complexity.</p>
+    <p class="sec-desc">Get started in minutes — no complexity, just smart finance management.</p>
 
     <div class="steps">
+
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-title">Download Free</div>
-        <div class="step-desc">Install SpendSage from the Google Play Store — completely free.</div>
+        <div class="step-desc">Install SpendSage from Google Play Store — completely free.</div>
       </div>
+
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-title">Set Your Budget</div>
-        <div class="step-desc">Enter your monthly budget and set limits for each spending category.</div>
+        <div class="step-desc">Enter monthly budget and category limits to stay in control.</div>
       </div>
+
       <div class="step">
         <div class="step-num">3</div>
-        <div class="step-title">Log Expenses</div>
-        <div class="step-desc">Add expenses as you spend — takes just 5 seconds each time.</div>
+        <div class="step-title">Add Daily Expenses</div>
+        <div class="step-desc">Log every expense as you spend — takes just 5 seconds.</div>
       </div>
+
       <div class="step">
         <div class="step-num">4</div>
-        <div class="step-title">See Insights</div>
-        <div class="step-desc">Watch your spending charts and make smarter financial decisions.</div>
+        <div class="step-title">Set Installment Due Dates</div>
+        <div class="step-desc">Add your Qist or loan payments with due dates — never miss one.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-title">Set Auto Payments</div>
+        <div class="step-desc">Add recurring payments like rent or subscriptions to track automatically.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-title">Check Analytics</div>
+        <div class="step-desc">View visual charts and insights to understand your spending habits.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-title">Check Monthly Records</div>
+        <div class="step-desc">Review complete monthly summaries — every expense tracked in detail.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">8</div>
+        <div class="step-title">Export to PDF / CSV</div>
+        <div class="step-desc">Download your financial reports as PDF or CSV — share or save anytime.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BANNER AD SECTION -->
+  <section class="ad-section-banner">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-banner-wrap">
+      <script>
+        atOptions = {
+          'key' : '42f4abcf39b1a9dc6ffc0b7206682e7e',
+          'format' : 'iframe',
+          'height' : 300,
+          'width' : 160,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/42f4abcf39b1a9dc6ffc0b7206682e7e/invoke.js"></script>
+    </div>
+  </section>
+
+  <!-- VIDEO AD SECTION -->
+  <section class="ad-section-video">
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-video-wrap">
+      <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; padding:2rem; text-align:center; max-width:500px; margin:0 auto;">
+        <div style="font-size:2rem; margin-bottom:1rem;">🎯</div>
+        <div style="font-family:'Syne',sans-serif; font-weight:700; color:var(--white); font-size:1.1rem; margin-bottom:0.5rem;">Special Offer For You</div>
+        <div style="color:var(--muted); font-size:0.88rem; margin-bottom:1.5rem; line-height:1.6;">Check out this exclusive deal — just for SpendSage visitors.</div>
+        <a href="https://www.effectivecpmnetwork.com/q9ec3eh6a?key=5d1a528a04e11e22968f7e9d8d67fd35"
+           target="_blank" rel="noopener"
+           style="display:inline-flex; align-items:center; gap:0.5rem; background:linear-gradient(135deg,#00C6FF,#6C63FF); color:white; text-decoration:none; padding:0.8rem 2rem; border-radius:9px; font-size:0.9rem; font-weight:500; transition:opacity 0.2s;">
+          View Offer →
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="cta-box">
-      <h2>Ready to Take Control?</h2>
-      <p>Join thousands of people who track their spending smarter with SpendSage. Free to download on Android.</p>
-      <a href="#" id="playStoreBtnBottom" class="btn-primary" style="display:inline-flex; margin:0 auto;">
-        ▶ Download on Google Play
-      </a>
-      <p style="margin-top:1.2rem; font-size:0.8rem; color:var(--muted);">
-        Free · Android · By IZ Developers
-      </p>
-    </div>
+  <!-- DOWNLOAD BUTTON -->
+  <section style="padding: 3rem 6%; background: var(--bg); text-align: center; border-top: 1px solid var(--border);">
+    <a href="https://play.google.com/store/apps/details?id=com.irtaza.spendsage" target="_blank" rel="noopener" class="playstore-btn">
+      <svg viewBox="0 0 24 24"><path d="M3.18 23.76a2.39 2.39 0 01-.92-.24l-.06-.03 9.38-9.38.04.04 2.57 2.57-11.01 7.04zm-1.13-1.1a2.39 2.39 0 01-.23-.98V2.32c0-.36.08-.69.23-.98l.04-.07 9.44 9.44-.04.04-9.44 9.44-.04-.07.04.07zM20.35 10.5l2.01 1.17c.57.33.57.87 0 1.2l-2.01 1.17-2.7-2.7 2.7-2.84zm-1.43.83L9.7 4.27 3.36 1.3a2.39 2.39 0 011.06-.03l.08.03 14.42 9.03z"/></svg>
+      Download on Google Play — Free
+    </a>
+    <p style="margin-top:0.9rem; font-size:0.78rem; color:var(--muted);">Android · By IZ Developers · Irtaza Hussain</p>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-copy">© 2025 IZ Developers · SpendSage</div>
+    <div class="footer-copy">© 2025 IZ Developers · SpendSage · izservices.site</div>
     <a href="index.html" class="footer-link">← Back to IZ Services</a>
   </footer>
 
   <script>
-    // Smooth scroll for features link
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -565,13 +609,11 @@
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
-          const top = target.getBoundingClientRect().top + window.pageYOffset - 80;
-          window.scrollTo({ top, behavior: 'smooth' });
+          window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
         }
       });
     });
 
-    // Scroll animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -579,7 +621,7 @@
           entry.target.style.transform = 'translateY(0)';
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
 
     document.querySelectorAll('.feature-card, .step, .cta-box').forEach(el => {
       el.style.opacity = '0';
